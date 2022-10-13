@@ -80,7 +80,7 @@ matrix_t * readFileToMatrix(FILE * f) {
             rows++;
         }
         if (!isValidDouble(linePtr)) {
-            fprintf(stderr, "invalid input in line %ld\n", rows + 1);
+            fprintf(stderr, "invalid input in line %ld\n", n + 3);
             exit(EXIT_FAILURE);
         }
         mat->values[rows - 1][cols] =  strtod(linePtr, NULL);
