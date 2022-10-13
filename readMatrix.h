@@ -50,7 +50,7 @@ matrix_t * readFileToMatrix(FILE * f) {
         fprintf(stderr, "in valid col number\n");
         exit(EXIT_FAILURE);
     }
-    mat->columns = strtoul(linePtr, NULL, 10);
+    mat->rows = strtoul(linePtr, NULL, 10);
     free(linePtr);
     linePtr = NULL;
     getline(&linePtr, &bufferSize, f);
@@ -58,7 +58,7 @@ matrix_t * readFileToMatrix(FILE * f) {
         fprintf(stderr, "invalid row number\n");
         exit(EXIT_FAILURE);
     }
-    mat->rows = strtoul(linePtr, NULL, 10);
+    mat->columns = strtoul(linePtr, NULL, 10);
     free(linePtr);
     linePtr = NULL;
     // read data into mat->values
