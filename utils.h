@@ -1,4 +1,4 @@
-#include<matrixMul.h>
+#include "matrixMul.h"
 
 void printMatrix(matrix_t * matrix) {
     for(size_t row = 0; row < matrix->rows; row++){
