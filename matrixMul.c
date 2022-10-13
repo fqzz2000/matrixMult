@@ -16,9 +16,7 @@ int main(int argc, const char **argv) {
     */
     matrix_t *leftMatrix = readMatrix(argv[1]);
     matrix_t *rightMatrix = readMatrix(argv[2]);
-    printMatrix(leftMatrix);
     
-    printMatrix(rightMatrix);
     
     matrix_t *multiplyMatrix = multiply(leftMatrix, rightMatrix);
     
