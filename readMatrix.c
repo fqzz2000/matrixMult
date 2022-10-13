@@ -1,5 +1,17 @@
 #include "utils.h"
 /*
+ * count number of spaces
+ */
+size_t countTokens(char * str, size_t size) {
+    for (int i = 0; i < size; i++) {
+        size_t count = 1;
+        if (str[i] == " ") {
+            count++;
+        }       
+    }
+    return count;
+}
+/*
  * take a stirng line, separate it by space and put values in the array 
  */
 size_t processLine(char * line, double * array)  {
@@ -39,9 +51,8 @@ matrix_t * readFileToMatrix(FILE * f) {
     printf("%lu\n", mat->columns);
     printf("%lu\n", mat->columns);
     // read data into mat->values
-    while ((n = getline(&linePtr, &bufferSize, f)) != EOF) {
-        printf("%ld\n", n);
-        if (mat->columns != n - 1) {
+    while (getline(&linePtr, &bufferSize, f) != EOF) {
+        if (mat->columns != countTokens(linePtr)) {
             fprintf(stderr, "inconsistant col numbers\n");
             exit(EXIT_FAILURE);
         }
