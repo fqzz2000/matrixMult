@@ -6,7 +6,7 @@
  */
 int isValidDouble(char * string) {
     regex_t regex;
-    char * pattern = "^[+-]?([0-9]+[.][0-9]+|[0-9]+)[\n]?$";
+    char * pattern = "^[+-]?([0-9]+[.][0-9]+|[0-9]+)(\r|\r\n|\n)?$";
     regcomp(&regex, pattern, REG_EXTENDED);
     if (!regexec(&regex, string, 0, NULL, 0)) {
         regfree(&regex);
@@ -22,7 +22,7 @@ int isValidDouble(char * string) {
  */
 int isValidSize(char * string) {
     regex_t regex;
-    char * pattern = "^[0-9]+[\n]?$";
+    char * pattern = "^[0-9]+(\r|\r\n|\n)?$";
     regcomp(&regex, pattern, REG_EXTENDED);
     if (!regexec(&regex, string, 0 , NULL, 0)) {
         regfree(&regex);
@@ -46,24 +46,28 @@ matrix_t * readFileToMatrix(FILE * f) {
     size_t rows = 0;
     // read the number of rows and cols
     getline(&linePtr, &bufferSize, f);
-    printf("%s\n", linePtr);
-    //if (!isValidSize(linePtr)) {
-    //    fprintf(stderr, "invalid row number\n");
-    //    exit(EXIT_FAILURE);
-    //}
+    if (!isValidSize(linePtr)) {
+        fprintf(stderr, "invalid row number\n");
+        exit(EXIT_FAILURE);
+    }
     mat->rows = strtoul(linePtr, NULL, 10);
     free(linePtr);
     linePtr = NULL;
     getline(&linePtr, &bufferSize, f);
-    //if (!isValidSize(linePtr)) {
-    //    fprintf(stderr, "invalid col number\n");
-    //    exit(EXIT_FAILURE);
-    //}
+    if (!isValidSize(linePtr)) {
+        fprintf(stderr, "invalid col number\n");
+        exit(EXIT_FAILURE);
+    }
     mat->columns = strtoul(linePtr, NULL, 10);
     free(linePtr);
     linePtr = NULL;
     // read data into mat->values
     while ((getline(&linePtr, &bufferSize, f))!= EOF) {
+        if (linePtr[0] == '\n' || linePtr[0] == '\r' || (linePtr[0] == '\r' && linePtr[1] == '\n')) {
+            free(linePtr);
+            linePtr = NULL;
+            continue;
+        }
         if (n >= mat->columns * mat->rows) {
             fprintf(stderr, "too many inputs\n");
             exit(EXIT_FAILURE);

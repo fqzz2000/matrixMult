@@ -4,6 +4,10 @@
 
 matrix_t * multiply(matrix_t * left, matrix_t * right) {
 
+    if (left->columns != right->rows) {
+        fprintf(stderr, "inconsistant size\n");
+        exit(EXIT_FAILURE);
+    }
 // Malloc the space for result
     matrix_t *result = malloc(sizeof(*result)); 
 
