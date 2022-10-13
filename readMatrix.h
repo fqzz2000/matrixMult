@@ -1,5 +1,5 @@
-#include "utils.h"
-#include<regex.h>
+# include<regex.h>
+# include "matrixMul.h"
 
 /*
  *  return if the input is valid for double format

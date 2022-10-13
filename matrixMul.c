@@ -1,4 +1,5 @@
-#include "matrixMul.h"
+# include "multiply.h"
+# include "readMatrix.h"
 
 int main(int argc, const char **argv) {
     //if we got wrong numbers of input files, exit the process
