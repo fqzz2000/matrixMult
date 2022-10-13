@@ -1,4 +1,6 @@
-#include "matrixMul.h"
+# include "multiply.h"
+# include "readMatrix.h"
+# include "utils.h"
 
 int main(int argc, const char **argv) {
     //if we got wrong numbers of input files, exit the process
@@ -14,8 +16,10 @@ int main(int argc, const char **argv) {
     */
     matrix_t *leftMatrix = readMatrix(argv[1]);
     matrix_t *rightMatrix = readMatrix(argv[2]);
+    
+    
     matrix_t *multiplyMatrix = multiply(leftMatrix, rightMatrix);
-
+    
     //print out the matrix multilication result to standard output
     printMatrix (multiplyMatrix);
 

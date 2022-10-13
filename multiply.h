@@ -1,3 +1,4 @@
+#include "matrixMul.h"
 // this function use the right and left matrix to multply and save the result to the result
 // result: a structure contains the result of the mnultiplications
 
